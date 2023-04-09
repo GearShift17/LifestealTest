@@ -23,7 +23,7 @@ PImage Planet;
 PImage Rek;
 PImage Red;
 PImage Ro;
-PImage Spepticle;
+PImage Spep;
 PImage Spoke;
 PImage Subz;
 PImage Terrain;
@@ -72,6 +72,15 @@ var BResult = 0;
 var Showy = 0;
 var OChange = 0;
 var Now = 1;
+var UpT = 0;
+var Swap1 = 0;
+var YUp = 800;
+var YUp2 = 800;
+var rock = 1;
+var pop = 1;
+var bell = 1;
+var orb = 1;
+var out = 1;
 
 
 var PlayersR = "";
@@ -99,7 +108,7 @@ Woogie 7
 Subz 8
 Cube 9
 Jarom 10
-Spepticle 11
+Spep 11
 Terrain 12
 Planet 13
 Ro 14
@@ -139,8 +148,8 @@ var RedX = 0;
 var RedY = 0;
 var RoX = 0;
 var RoY = 0;
-var SpepticleX = 0;
-var SpepticleY = 0;
+var SpepX = 0;
+var SpepY = 0;
 var SpokeX = 0;
 var SpokeY = 0;
 var SubzX = 0;
@@ -195,7 +204,7 @@ var move = 0;
       Planet = loadImage("Planet.png");
       Red = loadImage("Red.png");
       Ro = loadImage("Ro.png");
-      Spepticle = loadImage("Spepticle.png");
+      Spep = loadImage("Spepticle.png");
       Spoke = loadImage("Spoke.png");
       Subz = loadImage("Subz.png");
       Terrain = loadImage("Terrain.png");
@@ -230,11 +239,15 @@ var move = 0;
         var game = function() {
 
           scene = 3;
+        
            // -85  35  -3585
 
           draw = function() {
 
-            
+
+
+
+
             if (BackX > -85 - Day * 35) {
             BackX = BackX - 0.45;
             }
@@ -311,6 +324,9 @@ var move = 0;
                 if (mouseX >= 1070 && mouseX <= 1408 &&
                     mouseY >= 0 && mouseY <= 180 && scene === 3 && Nextshow === 1) {
                       Day = Day + 1;
+                      let orbsound = new Audio("Shutter Click.mp3");
+                      orbsound.play()
+                      orb = 0;
                       image(AUnPre, 100, 350, 150, 150);
                       image(BUnPre, 1150, 350, 150, 150); 
                       Nextshow = 0;
@@ -341,7 +357,7 @@ var move = 0;
               image(BUnPre, 1150, 350, 150, 150); 
 
             Showy = 1;
-            PlayersR = ["Bacon", "Pangi", "Spoke", "Zam", "Clown", "Parrot", "Woogie", "Subz", "Cube", "Jaron", "Spepticle", "Terrain", "Planet", "Ro", "Leo", "Ash", "Red", "Rek", "Vitalasy", "Cluch", "Poafa", "Mapicc"];
+            PlayersR = ["Bacon", "Pangi", "Spoke", "Zam", "Clown", "Parrot", "Woogie", "Subz", "Cube", "Jaron", "Spep", "Terrain", "Planet", "Ro", "Leo", "Ash", "Red", "Rek", "Vitalasy", "Cluch", "Poafa", "Mapicc"];
             PlayerRand = random(0, 21);
             PR = round(PlayerRand);
             Rand = "" + PlayersR[PR];
@@ -373,10 +389,27 @@ var move = 0;
             Rand + " isn't subscribed \nto GearShift.\nWhat do you do?\nA:Fight him\nB:Leave him alone",
             Rand + " killed your dog.\nWhat do you do?\nA:Fight him\nB:Talk to him about it",
             "You suspect " + Rand + " to \nbe hacking\nWhat do you do?\nA:Challenge him to a duel\nB:Let him be",
-            "You have free time,\nwhat do you do?\A:Make a trap\nB:Go mining",
-            Rand + " made a scavenger hunt.\nDo you do it?\nA:Yes\nB:No"
+            "You have free time,\nwhat do you do?\nA:Make a trap\nB:Go mining",
+            Rand + " made a scavenger hunt.\nDo you do it?\nA:Yes\nB:No",
+            Rand + " says he wants to \nshow you something.\nDo you go see it?\nA:Yes\nB:No",
+            Rand + " offers you some diamonds.\nDo you take them?\nA:Yes\nB:No",
+            "You see " + Rand + " in\nthe distance. Do you go\nsee them?\nA:Yes\nB:No",
+            "You fell in a void trap",
+            Rand + " has better stuff than\nyou and threatens you.\nWhat do you do?\nA:Log off lol\nB:Tell him he is too chicken",
+            "You run into " + Rand + ",\nwhat do you say?\nA:How are you?\nB:Please don't kill me",
+            "You randomly spot 100 \niron golems.What do you do?\nA:Leave, its not your problem\nB:Kill them",
+            "You suspect a building \nto be a trap.\nWhat do you do?\nA:Inspect it\nB:Leave it",
+            "You see " + Rand + ",\nwhat do you do?\nA:Kill him\nB:Walk away",
+            "You spot " + Rand + ", \ndo you go talk to them?\nA:Yes\nB:No", 
+            "You spot " + Rand + ", \ndo you go talk to them?\nA:Yes\nB:No",
+            "You spot " + Rand + ", \ndo you go talk to them?\nA:Yes\nB:No",
+            Rand + " is feeling kind \nand gives you a heart",
+            "You have free time,\nwhat do you do?\nA:Get a pet\nB:Go see " + Rand,
+            "You have free time,\nwhat do you do?\nA:Hunt down " + Rand + "\nB:Grief " + Rand + "'s base",
 
 
+
+            
           
           
           ];
@@ -407,7 +440,22 @@ var move = 0;
           "They didn't do it and you were \npublicly executed because of it",
           "He wasn't hacking and you won!",
           "You made a trap!",
-          "You lost and died in\nthe process."
+          "You lost and died in\nthe process.",
+          "It was a set of armor!\n(Increased luck)",
+          "It was a trap but you escaped",
+          "They chased you down \nand killed you",
+          "",
+          "He traped your spawn point",
+          "They were good",
+          "The person who killed them used\withers to do it.\nYou spawned in and were \nkilled by multiple withers",
+          "You found a heart in it!",
+          "You fought and won!",
+          "You had a conversation about\ncommand blocks and coding.",
+          "They didn't want to \ntalk so they killed you",
+          "You made a new ally",
+          "",
+          "You got a pet dog",
+          "You died in the process"
         
         
         
@@ -441,7 +489,22 @@ var move = 0;
           "Apparently they didn't do it",
           "He never was hacking",
           "You got some good materials",
-          "It wasn't a choice and you\nwere forced to do it.\nYou died in the process"
+          "It wasn't a choice and you\nwere forced to do it.\nYou died in the process",
+          "Better to play it safe",
+          "He killed you.\nYou should have said yes.",
+          "They saw you and killed you",
+          "",
+          "They ran off, crying.",
+          "They were very confused you\nwould say something like that",
+          "You got rid of them \nbut died in the process.",
+          "Better to play it safe",
+          "He killed you anyway",
+          "You didn't feel like talking",
+          "They got mad and chased\nand killed you",
+          "Guess you just \ndidn't want to talk",
+          "",
+          Rand + " said hi",
+          "Apparently the base was abandoned"
           
 
 
@@ -475,7 +538,21 @@ var move = 0;
         3,
         2,
         1,
-        3
+        3,
+        1,
+        1,
+        3,
+        1,
+        3,
+        1,
+        3,
+        2,
+        2,
+        1,
+        3,
+        1,
+        1,
+        1
       
       
       
@@ -509,7 +586,22 @@ var move = 0;
         1,
         1,
         1,
-        3
+        3,
+        1,
+        3,
+        3,
+        1,
+        1,
+        1,
+        3,
+        1,
+        3,
+        1,
+        3,
+        1,
+        1,
+        1
+      
       
       
       
@@ -519,12 +611,15 @@ var move = 0;
           Result = 
 
           [
-            4,5,6,7,8,2,1,1,2,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+            4,5,6,7,8,2,1,1,2,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,3,28,29,30,31,32,33,34,35,2
            ];
 
 
 
-            T = random(0, 23);
+            T = random(0, 50);
+            if(T >= 39){
+              T = -1;
+               }
             T2 = round(T);
             ShowSit = "" + Situations[T2];
             AFinal = "" + AAnswer[T2];
@@ -532,7 +627,11 @@ var move = 0;
             ARes = AResult[T2];
             BRes = BResult[T2];
             Resulty = Result[T2];
+            if(T < 0){
+              ShowSit = "Nothing happened today";
+              Resulty = 1;
 
+               }
            
       
       
@@ -554,13 +653,18 @@ var move = 0;
             mouseClicked = function() {
               if (mouseX >= 100 && mouseX <= 250 &&
                   mouseY >= 350 && mouseY <= 500 && scene === 3) {
-
+                    let outsound = new Audio("out.mp3");
+                    outsound.play()
+                    out = 0;
                 OChange = 1;
                 Showy = 2;
                 Now = 2;
           
               }else if (mouseX >= 1150 && mouseX <= 1300 &&
                 mouseY >= 350 && mouseY <= 500 && scene === 3) {
+                  let outsound = new Audio("out.mp3");
+                  outsound.play()
+                  out = 0;
                   OChange = 1;
                   Showy = 3;
                   Now = 2;
@@ -716,8 +820,8 @@ var move = 0;
             RoY = -1000;
             LeoX = -1000;
             LeoY = -1000;
-            SpepticleX = -1000;
-            SpepticleY = -1000;
+            SpepX = -1000;
+            SpepY = -1000;
             SpokeX = -1000;
             SpokeY = -1000;
             TerrainX = -1000;
@@ -780,8 +884,8 @@ var move = 0;
               JaromY = 650;
 
             }else if (me===11){
-              SpepticleX = 380;
-              SpepticleY = 673;
+              SpepX = 225;
+              SpepY = 673;
 
             }else if (me===12){
               TerrainX = 280;
@@ -841,7 +945,7 @@ var move = 0;
             image(Red, RedX, RedY, 110, 150);
             image(Ro, RoX, RoY, 150, 150);
             image(Leo, LeoX, LeoY, 145, 150);
-            image(Spepticle, SpepticleX, SpepticleY, 100, 130);
+            image(Spep, SpepX, SpepY, 100, 130);
             image(Spoke, SpokeX, SpokeY, 135, 150);
             image(Subz, SubzX, SubzY, 120, 150);
             image(Terrain, TerrainX, TerrainY, 120, 150);
@@ -863,7 +967,7 @@ var move = 0;
       var character = function() {
 
         scene= 2;
-
+        
         AshX = 1160;
         AshY = 250;
         BaconX = 1025;
@@ -886,8 +990,8 @@ var move = 0;
         RoY = 440;
         LeoX = 930;
         LeoY = 450;
-        SpepticleX = 810 - 55;
-        SpepticleY = 460;
+        SpepX = 810 - 55;
+        SpepY = 460;
         SpokeX = 83;
         SpokeY = 435;
         TerrainX = 680;
@@ -910,9 +1014,49 @@ var move = 0;
         MapiccY = 322;
 
 
-
+        YUp2 = 0;
         
         draw = function (){
+
+
+
+          if (Swap1 === 1){
+
+            UpT = UpT + 1.35;
+            
+    
+    
+          if(UpT <= 30){
+          YUp = YUp - 23;
+    
+          }else if(UpT <= 70){
+            YUp = YUp - 10;
+      
+            }else if(UpT <= 90){
+              YUp = YUp - 5;
+        
+              }else{
+                Yup = 800;
+              }
+    
+    
+          if(UpT < 130){
+          
+          fill(80, 8, 8);
+          strokeWeight(0);
+          rect(0, YUp, 1500, 1000);
+    
+          }
+          if (UpT >= 130){
+            fill(80, 8, 8);
+            strokeWeight(0);
+            rect(0, YUp, 1500, 1000);
+        character(); 
+    
+    
+          }
+      } 
+
 
           if (me != 0){
 
@@ -947,7 +1091,7 @@ var move = 0;
               Name = "Jaron"
 
             }else if (me===11){
-              Name = "Spepticle"
+              Name = "Spep"
 
             }else if (me===12){
               Name = "Terrain"
@@ -992,7 +1136,7 @@ var move = 0;
 
  
 
-
+           
 
 
 
@@ -1007,6 +1151,12 @@ var move = 0;
 
         game();
           }
+
+
+
+
+          
+         
 
 
           if (scene === 2 && me === 0) {
@@ -1098,12 +1248,12 @@ var move = 0;
                           rect(JaromX + 10, JaromY +2, 97, 148);
                   
                   
-                          }if (mouseX >= SpepticleX + 3 && mouseX <= SpepticleX +87 &&
-                            mouseY >= SpepticleY + 5 && mouseY <= SpepticleY + 127) {
+                          }if (mouseX >= SpepX + 3 && mouseX <= SpepX +87 &&
+                            mouseY >= SpepY + 5 && mouseY <= SpepY + 127) {
                     
                               fill(242,242,242);
                               stroke(0,0,0);
-                            rect(SpepticleX + 4, SpepticleY + 5, 88, 123);
+                            rect(SpepX + 4, SpepY + 5, 88, 123);
                     
                     
                             }if (mouseX >= TerrainX + 17 && mouseX <= TerrainX + 100 &&
@@ -1213,117 +1363,183 @@ var move = 0;
                                         if (mouseX >= BaconX + 10 && mouseX <= BaconX + 100 &&
                                           mouseY >= BaconY + 5 && mouseY <= BaconY + 145) {
 
+                                            let bellsound = new Audio("levelup.mp3");
+                                             bellsound.play()
+                                             bell = 0;
                                             me = 1;
                                             
                                           }if (mouseX >= PangiX + 10 && mouseX <= PangiX + 100 &&
                                             mouseY >= PangiY + 10 && mouseY <= PangiY + 140) {
+                                              let bellsound = new Audio("levelup.mp3");
+                                              bellsound.play()
+                                              bell = 0;
                                                me = 2;
                                               
                                             }if (mouseX >= SpokeX + 10 && mouseX <= SpokeX + 100 &&
                                               mouseY >= SpokeY + 5 && mouseY <= SpokeY + 145) {
+                                                let bellsound = new Audio("levelup.mp3");
+                                                bellsound.play()
+                                                bell = 0;
                                                 me = 3;
                                                 
                                       
                                               }if (mouseX >= ZamX + 10 && mouseX <= ZamX + 100 &&
                                                 mouseY >= ZamY + 5 && mouseY <= ZamY + 145) {
+                                                  let bellsound = new Audio("levelup.mp3");
+                                                  bellsound.play()
+                                                  bell = 0;
                                                   me = 4;
                                                   
                                         
                                                 }if (mouseX >= ClownX + 35 && mouseX <= ClownX + 145 &&
                                                   mouseY >= ClownY + 10 && mouseY <= ClownY + 145) {
+                                                    let bellsound = new Audio("levelup.mp3");
+                                                    bellsound.play()
+                                                    bell = 0;
                                                     me = 5;
                                                    
                                           
                                                   }if (mouseX >= ParrotX + 10 && mouseX <= ParrotX + 100 &&
                                                     mouseY >= ParrotY + 5 && mouseY <= ParrotY + 145) {
+                                                      let bellsound = new Audio("levelup.mp3");
+                                                      bellsound.play()
+                                                      bell = 0;
                                                       me = 6;
                                                      
                                             
                                                     }if (mouseX >= WoogieX + 17 && mouseX <= WoogieX + 100 &&
                                                       mouseY >= WoogieY + 10 && mouseY <= WoogieY + 145) {
+                                                        let bellsound = new Audio("levelup.mp3");
+                                                        bellsound.play()
+                                                        bell = 0;
                                                         me = 7;
                                                         
                                               
                                                       }if (mouseX >= SubzX + 12 && mouseX <= SubzX +98 &&
                                                         mouseY >= SubzY + 15 && mouseY <= SubzY + 145) {
+                                                          let bellsound = new Audio("levelup.mp3");
+                                                          bellsound.play()
+                                                          bell = 0;
                                                           me = 8;
                                                          
                                                         }if (mouseX >= CubeX + 3 && mouseX <= CubeX +87 &&
                                                           mouseY >= CubeY + 3 && mouseY <= CubeY + 133) {
+                                                            let bellsound = new Audio("levelup.mp3");
+                                                            bellsound.play()
+                                                            bell = 0;
                                                             me = 9;
                                                            
                                                   
                                                           }if (mouseX >= JaromX + 15 && mouseX <= JaromX + 97 &&
                                                             mouseY >= JaromY + 5 && mouseY <= JaromY + 145) {
+                                                              let bellsound = new Audio("levelup.mp3");
+                                                              bellsound.play()
+                                                              bell = 0;
                                                               me = 10;
                                                               
                                                     
-                                                            }if (mouseX >= SpepticleX + 3 && mouseX <= SpepticleX +87 &&
-                                                              mouseY >= SpepticleY + 5 && mouseY <= SpepticleY + 127) {
+                                                            }if (mouseX >= SpepX + 3 && mouseX <= SpepX +87 &&
+                                                              mouseY >= SpepY + 5 && mouseY <= SpepY + 127) {
+                                                                let bellsound = new Audio("levelup.mp3");
+                                                                bellsound.play()
+                                                                bell = 0;
                                                                 me = 11;
                                                                
                                                       
                                                               }if (mouseX >= TerrainX + 17 && mouseX <= TerrainX + 100 &&
                                                                 mouseY >= TerrainY + 10 && mouseY <= TerrainY + 140) {
+                                                                  let bellsound = new Audio("levelup.mp3");
+                                                                  bellsound.play()
+                                                                  bell = 0;
                                                                   me = 12;
                                                                 
                                                         
                                                                 }if (mouseX >= PlanetX + 10 && mouseX <= PlanetX + 100 &&
                                                                   mouseY >= PlanetY + 5 && mouseY <= PlanetY + 145) {
+                                                                    let bellsound = new Audio("levelup.mp3");
+                                                                    bellsound.play()
+                                                                    bell = 0;
                                                                     me = 13;
                                                                    
                                                           
                                                           
                                                                   }if (mouseX >= RoX + 15 && mouseX <= RoX + 125 &&
                                                                     mouseY >= RoY + 5 && mouseY <= RoY + 137) {
+                                                                      let bellsound = new Audio("levelup.mp3");
+                                                                      bellsound.play()
+                                                                      bell = 0;
                                                                       me = 14;
                                                                     
                                                             
                                                             
                                                                     }if (mouseX >= LeoX + 30 && mouseX <= LeoX + 100 &&
                                                                       mouseY >= LeoY + 5 && mouseY <= LeoY + 145) {
+                                                                        let bellsound = new Audio("levelup.mp3");
+                                                                        bellsound.play()
+                                                                        bell = 0;
                                                                         me = 15;
                                                                        
                                                               
                                                               
                                                                       }if (mouseX >= AshX + 10 && mouseX <= AshX + 100 &&
                                                                         mouseY >= AshY + 5 && mouseY <= AshY + 145) {
+                                                                          let bellsound = new Audio("levelup.mp3");
+                                                                          bellsound.play()
+                                                                          bell = 0;
                                                                           me = 16;
                                                                        
                                                                 
                                                                 
                                                                         }if (mouseX >= RedX + 18 && mouseX <= RedX + 100 &&
                                                                           mouseY >= RedY + 5 && mouseY <= RedY + 145) {
+                                                                            let bellsound = new Audio("levelup.mp3");
+                                                                            bellsound.play()
+                                                                            bell = 0;
                                                                             me = 17;
                                                                             
                                                                   
                                                                   
                                                                           }if (mouseX >= RekX + 23 && mouseX <= RekX + 100 &&
                                                                             mouseY >= RekY + 5 && mouseY <= RekY + 145) {
+                                                                              let bellsound = new Audio("levelup.mp3");
+                                                                              bellsound.play()
+                                                                              bell = 0;
                                                                               me = 18;
                                                                               
                                                                     
                                                                     
                                                                             }if (mouseX >= VitalasyX + 18 && mouseX <= VitalasyX + 95 &&
                                                                               mouseY >= VitalasyY + 5 && mouseY <= VitalasyY + 145) {
+                                                                                let bellsound = new Audio("levelup.mp3");
+                                                                                bellsound.play()
+                                                                                bell = 0;
                                                                       
                                                                                 me = 19
                                                                       
                                                                       
                                                                               }if (mouseX >= ClutchX + 23 && mouseX <= ClutchX + 100 &&
                                                                                 mouseY >= ClutchY + 5 && mouseY <= ClutchY + 125) {
+                                                                                  let bellsound = new Audio("levelup.mp3");
+                                                                                  bellsound.play()
+                                                                                  bell = 0;
                                                                         
                                                                                   me =20;
                                                                         
                                                                         
                                                                                 }if (mouseX >= PoafaX + 15 && mouseX <= PoafaX + 100 &&
                                                                                   mouseY >= PoafaY + 8 && mouseY <= PoafaY + 145) {
+                                                                                    let bellsound = new Audio("levelup.mp3");
+                                                                                    bellsound.play()
+                                                                                    bell = 0;
                                                                           
                                                                                  me =21;
                                                                           
                                                                           
                                                                                   }if (mouseX >= MapiccX + 15 && mouseX <= MapiccX + 100 &&
                                                                                     mouseY >= MapiccY + 5 && mouseY <= MapiccY + 145) {
+                                                                                      let bellsound = new Audio("levelup.mp3");
+                                                                                      bellsound.play()
+                                                                                      bell = 0;
                                                                             
                                                                                       me =22;
                                                                             
@@ -1359,7 +1575,7 @@ var move = 0;
       image(Red, RedX, RedY, 110, 150);
       image(Ro, RoX, RoY, 150, 150);
       image(Leo, LeoX, LeoY, 145, 150);
-      image(Spepticle, SpepticleX, SpepticleY, 100, 130);
+      image(Spep, SpepX, SpepY, 100, 130);
       image(Spoke, SpokeX, SpokeY, 135, 150);
       image(Subz, SubzX, SubzY, 120, 150);
       image(Terrain, TerrainX, TerrainY, 120, 150);
@@ -1373,7 +1589,11 @@ var move = 0;
       image(Mapicc,  MapiccX, MapiccY, 135, 160);                                                                  }
         
         
-
+      if (YUp <= 820){
+        YUp = YUp + 23;
+       fill(80, 8, 8);
+      strokeWeight(0);
+      rect(0, YUp, 1500, 1000);}
 
 
 
@@ -1391,6 +1611,7 @@ var move = 0;
           }
 
 
+
           for (var i = 0; i < 50; i+=1) {
             var x = i * 30;
             stroke(80, 8, 8);
@@ -1406,19 +1627,67 @@ var move = 0;
         strokeWeight(8);
         line(x + move, 800, x + move, 0);
     }
-      image(Heart, IntroAnimationX1, 450, 400, 400);
+     
+      
+    
+
+
+
+      if (Swap1 === 1){
+
+        UpT = UpT + 1.35;
+        
+     if (UpT >= 1 && rock === 1){
+      let stonesound = new Audio("Stone Slide Sound Effects.mp3");
+          stonesound.play()
+rock = 0;
+     }
+
+
+     if (UpT >=90 && pop === 1){
+      let popsound = new Audio("pop.mp3");
+      popsound.play()
+      pop = 0;
+     }
+     
+
+      if(UpT <= 30){
+      YUp = YUp - 23;
+
+      }else if(UpT <= 70){
+        YUp = YUp - 10;
+  
+        }else if(UpT <= 90){
+          YUp = YUp - 5;
+         
+          }
+
+
+      if(UpT < 130){
+      
+      fill(80, 8, 8);
+      strokeWeight(0);
+      rect(0, YUp, 1500, 1000);
+
+      }
+      if (UpT >= 130){
+        fill(80, 8, 8);
+        strokeWeight(0);
+        rect(0, YUp, 1500, 1000);
+    character(); 
+
+
+      }
+  } 
+
+fill(255, 255,255);
+       
+     if (UpT <= 90){
+       image(Heart, IntroAnimationX1, 450, 400, 400);
       image(Heart, IntroAnimationX2, 450, 400, 400);
       textSize(100);
       text("PLAY", IntroAnimationX2 + 75, buttony1);
 
-      
-      
-
-
-
-       
-     
-      
         if (whooshy === 1){
           let whoosh = new Audio("RakeSwingWhooshClose.mp3");
           
@@ -1469,8 +1738,9 @@ var move = 0;
                   tbd();  
               }else if (mouseX >= IntroAnimationX2 + 50 && mouseX <= IntroAnimationX2 + 340 &&
                 mouseY >= buttony1 + 15 && mouseY <= buttony1 + 300 && scene === 1) {
-  
-                character();  
+                  
+
+                  Swap1 = 1;
             }
     
             
@@ -1478,7 +1748,7 @@ var move = 0;
             
           }
         
-          
+        }
             
         
         
