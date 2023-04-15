@@ -33,6 +33,9 @@ PImage Vitalasy;
 PImage Poafa;
 PImage Clutch;
 PImage Mapicc;
+PImage Vortex;
+PImage Mid;
+PImage Branzy;
 
 
             
@@ -120,6 +123,9 @@ Vitalasy 19
 Clutch 20
 Poafa 21
 Mapicc 22
+Vortex 23
+Mid 24
+Branzy 25
 
 
 
@@ -170,6 +176,12 @@ var PoafaX = 0;
 var PoafaY = 0;
 var MapiccX = 0;
 var MapiccY = 0;
+var VortexX = 0;
+var VortexY = 0;
+var MidX = 0;
+var MidY = 0;
+var BranzyX = 0;
+var BranzyY = 0;
 var move = 0;
 
 
@@ -215,6 +227,9 @@ var move = 0;
       Clutch = loadImage("Clutch.png");
       Poafa = loadImage("Poafa.png");
       Mapicc = loadImage("Mapicc.png");
+      Vortex = loadImage("Vortex.png");
+      Mid = loadImage("Mid.png");
+      Branzy = loadImage("Branzy.png");
 
 
 
@@ -242,11 +257,38 @@ var move = 0;
         
            // -85  35  -3585
 
+
+
           draw = function() {
 
 
 
+            if (Hearts === 0){
+              
+              scene = 9;
 
+              
+              background(80, 8, 8);
+              fill(0, 0, 0);
+              textSize(142);
+              text("GG! You got to day "+ Day, 5, 400);
+
+
+               }if (Day === 100){
+              
+                scene = 9;
+  
+                
+                background(255, 213, 0);
+                fill(0, 0, 0);
+                textSize(130);
+                textAlign(CENTER);
+                text("Congrats!\nYou won with "+ Hearts + " hearts!", 700, 350);
+  
+  
+                 }
+
+               if(scene === 3){
 
             if (BackX > -85 - Day * 35) {
             BackX = BackX - 0.45;
@@ -357,8 +399,8 @@ var move = 0;
               image(BUnPre, 1150, 350, 150, 150); 
 
             Showy = 1;
-            PlayersR = ["Bacon", "Pangi", "Spoke", "Zam", "Clown", "Parrot", "Woogie", "Subz", "Cube", "Jaron", "Spep", "Terrain", "Planet", "Ro", "Leo", "Ash", "Red", "Rek", "Vitalasy", "Cluch", "Poafa", "Mapicc"];
-            PlayerRand = random(0, 21);
+            PlayersR = ["Bacon", "Pangi", "Spoke", "Zam", "Clown", "Parrot", "Woogie", "Subz", "Cube", "Jaron", "Spep", "Terrain", "Planet", "Ro", "Leo", "Ash", "Red", "Rek", "Vitalasy", "Cluch", "Poafa", "Mapicc", "Vortex", "Mid","Branzy"];
+            PlayerRand = random(0, 24);
             PR = round(PlayerRand);
             Rand = "" + PlayersR[PR];
           
@@ -376,7 +418,7 @@ var move = 0;
             "You mine 100 diamonds. \nGear (Luck) increased",
             "You trap " + Rand + " with entity \ncramming. \nYou gain a heart.",
             Rand + " offers a fair fight \nDo you fight him?\nA:Yes\nB:No",
-            Rand + " finds your hidden base.\nWhat do you do?\nA:Call your allies\nB:Fight him yourself",
+            Rand + " found your hidden base.\nWhat do you do?\nA:Call your allies\nB:Fight him yourself",
             Rand + " offers you a full beacon.\nDo you take it?\nA:Yes\nB:No",
             "You have the opportunity to \ntrap " + Rand + ". Do you take it?\nA:Yes\nB:No",
             "You see " + Rand + " what do \nyou say?\nA: Hello Sir!\nB: Sup, loser!",
@@ -392,7 +434,7 @@ var move = 0;
             "You have free time,\nwhat do you do?\nA:Make a trap\nB:Go mining",
             Rand + " made a scavenger hunt.\nDo you do it?\nA:Yes\nB:No",
             Rand + " says he wants to \nshow you something.\nDo you go see it?\nA:Yes\nB:No",
-            Rand + " offers you some diamonds.\nDo you take them?\nA:Yes\nB:No",
+            Rand + " offers you some \ndiamonds. Do you take them?\nA:Yes\nB:No",
             "You see " + Rand + " in\nthe distance. Do you go\nsee them?\nA:Yes\nB:No",
             "You fell in a void trap",
             Rand + " has better stuff than\nyou and threatens you.\nWhat do you do?\nA:Log off lol\nB:Tell him he is too chicken",
@@ -406,6 +448,43 @@ var move = 0;
             Rand + " is feeling kind \nand gives you a heart",
             "You have free time,\nwhat do you do?\nA:Get a pet\nB:Go see " + Rand,
             "You have free time,\nwhat do you do?\nA:Hunt down " + Rand + "\nB:Grief " + Rand + "'s base",
+            Rand + " fell into the void\nbut logged off\nDo you save him?\nA:Save him\nB:Trick him",
+            "You have spare redstone.\nWhat do you make?\nA:An auto farm\nB:A trap",
+            Rand + " starts fighting you.\nDo you fight back or run?\nA:Fight\nB:Run",
+            "You see an odd tree.\nDo you chop it down?\nA:Yes\nB:No",
+            Rand + " says they want to\nshow you something.\nDo you go see it?\nA:Yes\nB:No",
+            "You find 1,000s of pigs on the \nserver. What do you do?\nA:Kill them all\nB:Log off, you've been \nplaying too much Minecraft",
+            Rand + " gave you some gear!",
+            Rand + " challenges you to\na game of rock, paper, scissors\nWhat do you choose?\nA:Rock ----- B:Paper\n(No one likes scissors)",
+            Rand + " jumps you! \nWhat do you do?! \nA: Pearl out of there!\nB:JUST RUN!",
+            Rand + " kills you.\nDo you get revenge?\nA:Yes\nB:No",
+            Rand + " wants to know if \nyou want to team.\nWhat do you say?\nA:Yes\nB:No",
+            Rand + " wants to know if \nyou want to team.\nWhat do you say?\nA:Yes\nB:No",
+            Rand + " wants to know if \nyou want to team.\nWhat do you say?\nA:Yes\nB:No",
+            Rand + " wants to trade you a \nset of gear for a heart.\nDo you accept?\nA:Yes\nB:No",
+            Rand + " says they want to\nshow you something.\nDo you go see it?\nA:Yes\nB:No",
+            Rand + " says they want to\nshow you something.\nDo you go see it?\nA:Yes\nB:No",
+            Rand + " gave you a heart", 
+            Rand + " killed you with \na warden trap",
+            Rand + " burned down your house\nWhat do you do?\nA:Burn down theres\nB:Try to kill them",
+            Rand + " got a Monopoly on \nan item.\nWhat do you do?\nA:Try to steal it\nB:Ignore it",
+            Rand + " has been going \naround killing people.\nWhat do you do?\nA:Hide\nB:Hunt him down",
+            Rand + " has been stealing \nfrom everyone\nWhat do you do?\nA:Stop him!\nB:Mind your own business",
+            Rand + " just hit 20 lives\nAre you fine with that?\nA:No, you need to stop them!\nB:Its fine",
+            "QUICK! You fell off a tower!\nWhat do you do?\nA:Reach into your inventory\nfor a water bucket\nB:Ladder mlg",
+            "You see " + Rand + " griefing\nyour base.\nWhat do you do?\nA:Fight them\nB:Ask them to stop",
+            "You see a lave cast at spawn.\nWhat do you do?\nA:Mine it down\nB:Leave it",
+            "You need to go to the end.\nHow do you get to the portal?\nA:Travel by overworld\nB:Travel through the nether",
+            "You want to make a farm.\nWhich one do you make?\nA:A mob farm\nB:A food farm",
+            "You want to make a trap.\nWhich one do you make?\nA:A driptstone trap\nB:A tnt trap",
+            Rand + " built a parkour.\nDo you try it?\nA:Yes\nB:No",
+            "You suspect " + Rand + " to\nbe up to something.\nDo you go see what it is?\nA:Yes\nB:No",
+            "You suspect " + Rand + " to\nbe up to something.\nDo you go see what it is?\nA:Yes\nB:No",
+            "You're bored, do you \ngo talk to " + Rand + "?\nA:Yes\nB:No"
+
+            
+           
+
 
 
 
@@ -437,7 +516,7 @@ var move = 0;
           "You made a new ally!",
           "You lost the fight",
           "You won of course!!!",
-          "They didn't do it and you were \npublicly executed because of it",
+          "They didn't do it and you were \nkilled because of it",
           "He wasn't hacking and you won!",
           "You made a trap!",
           "You lost and died in\nthe process.",
@@ -447,7 +526,7 @@ var move = 0;
           "",
           "He traped your spawn point",
           "They were good",
-          "The person who killed them used\withers to do it.\nYou spawned in and were \nkilled by multiple withers",
+          "The person who killed them \nused withers to do it.\nYou spawned in and were \nkilled by multiple withers",
           "You found a heart in it!",
           "You fought and won!",
           "You had a conversation about\ncommand blocks and coding.",
@@ -455,7 +534,41 @@ var move = 0;
           "You made a new ally",
           "",
           "You got a pet dog",
-          "You died in the process"
+          "You died in the process",
+          "You made an ally",
+          "You made a bee farm",
+          "You won the fight!",
+          "Someone was hiding their\nvaluables under it!\n(Including an extra heart)",
+          "It was a trap",
+          "Good thing you had mending\non your sword.\n \nWhoever spawned all the pigs\nmust not have cared they died.",
+          "",
+          "They chose paper, you lose",
+          "The pearl was too slow.\nYou died.",
+          "You won the fight!",
+          "You are now allies",
+          "They gave you a heart to\ngain your trust",
+          "You shouldn't have trusted them\nYou died",
+          "Nice! You got a heart!",
+          "You got some free gear!",
+          "It was a trap they made \nfor another player.\nWhen you used it you got a life!",
+          "",
+          "",
+          "You are not enemies",
+          "You saved the server!",
+          "They found you",
+          "You killed them",
+          "You were killed",
+          "You got it just in time!",
+          "You got them to stop",
+          "It was a social experiement and\nyou got a heart.",
+          "You got there eventually",
+          "You made a mob farm",
+          "The trap worked but you\ndidn't get the heart",
+          "It wasn't trapped \nand you had fun!",
+          "They were planning a trap\nand you avoided it",
+          "They killed you for\nbeing suspicious and\nchecking it out",
+          "You had a good conversation"
+          
         
         
         
@@ -481,7 +594,7 @@ var move = 0;
           Rand + " changes their skin to\nthe Hulk and starts chasing\nyou around. You are\nvery confused.",
           "He saw and killed you",
           "He believed you but the\nperson you framed, killed you",
-          "Maybe someone else will be better",
+          "Maybe someone else \nwill be better",
           "You grabbed the water \njust in time",
           "Better to play it safe",
           "You barely got away",
@@ -504,7 +617,41 @@ var move = 0;
           "Guess you just \ndidn't want to talk",
           "",
           Rand + " said hi",
-          "Apparently the base was abandoned"
+          "Apparently the base was \nabandoned",
+          "You didn't even get the heart.\nYou made an enemy",
+          "The trap never worked",
+          "You got away",
+          "Better to play it safe",
+          "They really wanted you to\nsee it. You died.",
+          "You did something meaningful \nwith your life.\n \nFor 5 minutes.",
+          "",
+          "They chose rock, you won!",
+          "You barely escaped!",
+          "You are fine with losing \nthat heart.",
+          "They killed you in response",
+          "They were fine with it",
+          "They walked away",
+          "You declined",
+          "There is always another day",
+          "There is always another day",
+          "",
+          "",
+          "You died",
+          "Someone else fixed the problem",
+          "You fought them and won",
+          "Better to play it safe",
+          "They later lost some hearts",
+          "You landed it!",
+          "They killed you",
+          "You have better things to do",
+          "A portal you went through was\ntrapped but you got out.",
+          "You made a food farm",
+          "The trap worked and \nyou got the kill!",
+          "Better to play it safe",
+          "They were planning a \ntrap and you died.",
+          "They were planning a \nsuprise party for you!",
+          "Guess you're still just bored"
+
           
 
 
@@ -514,6 +661,7 @@ var move = 0;
 
         AResult = 
           
+       
         [3, 
         1, 
         3,
@@ -552,6 +700,40 @@ var move = 0;
         3,
         1,
         1,
+        1,
+        3,
+        1,
+        1,
+        2,
+        2,
+        3,
+        1,
+        1,
+        1,
+        3,
+        3,
+        1,
+        2,
+        3,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        3,
+        2,
+        3,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
         1
       
       
@@ -561,7 +743,8 @@ var move = 0;
 
 
       BResult = 
-        
+       
+      
         [3, 
         1, 
         1,
@@ -600,7 +783,42 @@ var move = 0;
         3,
         1,
         1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        1,
+        1,
+        1,
+        1,
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        1,
+        2,
+        1,
+        1,
+        1,
+        3,
+        1,
+        1,
+        1,
+        2,
+        1,
+        3,
+        1,
         1
+        
       
       
       
@@ -611,13 +829,14 @@ var move = 0;
           Result = 
 
           [
-            4,5,6,7,8,2,1,1,2,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,3,28,29,30,31,32,33,34,35,2
+            4,5,6,7,8,2,1,1,2,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,3,28,29,30,31,32,33,34,35,2,36,37,38,39,40,41,42,43,1,44,45,46,47,48,49,50,51,52,2,3,53,54,55,56,57,58,
+            59,60,61,62,63,64,65,66,67
            ];
 
 
 
-            T = random(0, 50);
-            if(T >= 39){
+            T = random(0, 100);
+            if(T >= 71){
               T = -1;
                }
             T2 = round(T);
@@ -633,7 +852,7 @@ var move = 0;
 
                }
            
-      
+               
       
       
 
@@ -689,7 +908,7 @@ var move = 0;
 
             } else {
 
-              PlayerRand = random(0, 21);
+              PlayerRand = random(0, 24);
               PR = round(PlayerRand);
               Rand = "" + PlayersR[PR];
 
@@ -842,6 +1061,13 @@ var move = 0;
             PoafaY = -1000;
             MapiccX = -1000;
             MapiccY = -1000;
+            VortexX = -1000;
+            VortexY = -1000;
+            MidX = -1000;
+            MidY = -1000;
+            BranzyX = -1000;
+            BranzyY = -1000;
+            
 
             if (me===1){
               BaconX = 255;
@@ -931,7 +1157,20 @@ var move = 0;
               MapiccX = 281;
               MapiccY = 660;
 
+            }else if (me===23){
+              VortexX = 255;
+              VortexY = 664;
+
+            }else if (me===24){
+              MidX = 155;
+              MidY = 660;
+
+            }else if (me===25){
+              BranzyX = 277;
+              BranzyY = 660;
+
             }
+          
 
 
 
@@ -957,8 +1196,11 @@ var move = 0;
             image(Clutch,  ClutchX, ClutchY, 115, 150);
             image(Poafa,  PoafaX, PoafaY, 115, 150);
             image(Mapicc,  MapiccX, MapiccY, 135, 160); 
+            image(Vortex, VortexX, VortexY, 190, 150);
+            image(Mid,  MidX, MidY, 105, 143);
+            image(Branzy, BranzyX, BranzyY, 120, 150);
 
-          }}
+          }}}
 
 
 
@@ -980,7 +1222,7 @@ var move = 0;
         JaromY = 435;
         PangiX = -10;
         PangiY = 470;
-        ParrotX = 650;
+        ParrotX = 650-20;
         ParrotY = 200;
         PlanetX = 875;
         PlanetY = 100;
@@ -1000,11 +1242,11 @@ var move = 0;
         WoogieY = 440;
         ZamX = 185;
         ZamY = 440;
-        SubzX = 520 - 205;
+        SubzX = 520 - 265;
         SubzY = 225;
         RekX = 1190;
         RekY = 440;
-        VitalasyX = 520 - 295;
+        VitalasyX = 520 - 355;
         VitalasyY = 230;
         ClutchX = 935;
         ClutchY = 333;
@@ -1012,7 +1254,12 @@ var move = 0;
         PoafaY = 460;
         MapiccX = 1287;
         MapiccY = 322;
-
+        VortexX = 480-20;
+        VortexY = 200;
+        MidX = 625 - 140;
+        MidY = 457;
+        BranzyX = 810 - 58;
+        BranzyY = 339;
 
         YUp2 = 0;
         
@@ -1020,7 +1267,7 @@ var move = 0;
 
 
 
-          if (Swap1 === 1){
+          if (Swap1 <= 1){
 
             UpT = UpT + 1.35;
             
@@ -1126,6 +1373,14 @@ var move = 0;
             }else if (me===22){
               Name = "Mapicc"
 
+            }else if (me===23){
+              Name = "Vortex"
+
+            }else if (me===24){
+              Name = "Mid"
+
+            }else if (me===25){
+              Name="Branzy"
             }
 
             
@@ -1344,7 +1599,31 @@ var move = 0;
                                                   rect(MapiccX + 6, MapiccY +10, 105, 140);
                                           
                                           
-                                                  }
+                                                  }if (mouseX >= VortexX + 6 && mouseX <= VortexX + 176 &&
+                                                    mouseY >= VortexY + 5 && mouseY <= VortexY + 142) {
+                                            
+                                                      fill(242,242,242);
+                                                      stroke(0,0,0);
+                                                    rect(VortexX + 8, VortexY, 171, 149);
+                                            
+                                            
+                                                    }if (mouseX >= MidX + 5 && mouseX <= MidX + 97 &&
+                                                      mouseY >= MidY + 0 && mouseY <= MidY + 145) {
+                                              
+                                                        fill(242,242,242);
+                                                        stroke(0,0,0);
+                                                      rect(MidX + 5, MidY - 1, 93, 147);
+                                              
+                                              
+                                                      }if (mouseX >= BranzyX + 7 && mouseX <= BranzyX + 97 &&
+                                                        mouseY >= BranzyY + 3 && mouseY <= BranzyY + 123) {
+                                                
+                                                          fill(242,242,242);
+                                                          stroke(0,0,0);
+                                                        rect(BranzyX + 3, BranzyY - 1, 100, 141);
+                                                
+                                                
+                                                        }
 
 
 
@@ -1543,7 +1822,33 @@ var move = 0;
                                                                             
                                                                                       me =22;
                                                                             
-                                                                                    }
+                                                                                    }if (mouseX >= VortexX + 6 && mouseX <= VortexX + 176 &&
+                                                                                      mouseY >= VortexY + 5 && mouseY <= VortexY + 142) {
+                                                                                        let bellsound = new Audio("levelup.mp3");
+                                                                                        bellsound.play()
+                                                                                        bell = 0;
+                                                                              
+                                                                                        me =23;
+                                                                                      }if (mouseX >= MidX + 5 && mouseX <= MidX + 97 &&
+                                                                                        mouseY >= MidY + 0 && mouseY <= MidY + 145) {
+                                                                                
+                                                                                          let bellsound = new Audio("levelup.mp3");
+                                                                                      bellsound.play()
+                                                                                      bell = 0;
+                                                                            
+                                                                                      me =24;
+                                                                                
+                                                                                        }if (mouseX >= BranzyX + 7 && mouseX <= BranzyX + 97 &&
+                                                                                          mouseY >= BranzyY + 3 && mouseY <= BranzyY + 123) {
+                                                                                  
+                                                                                            let bellsound = new Audio("levelup.mp3");
+                                                                                      bellsound.play()
+                                                                                      bell = 0;
+                                                                            
+                                                                                      me =25;
+                                                                                  
+                                                                                  
+                                                                                          }
                                                                         
                                                                         
                                                                         
@@ -1586,7 +1891,12 @@ var move = 0;
       image(Vitalasy,  VitalasyX, VitalasyY, 115, 150);
       image(Clutch,  ClutchX, ClutchY, 115, 150);
       image(Poafa,  PoafaX, PoafaY, 115, 150);
-      image(Mapicc,  MapiccX, MapiccY, 135, 160);                                                                  }
+      image(Mapicc,  MapiccX, MapiccY, 135, 160);
+      image(Vortex, VortexX, VortexY, 190, 150);
+      image(Mid,  MidX, MidY, 105, 143); 
+      image(Branzy, BranzyX, BranzyY, 110, 140);
+     
+                                                                 }
         
         
       if (YUp <= 820){
