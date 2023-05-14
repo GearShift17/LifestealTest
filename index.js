@@ -399,7 +399,7 @@ var move = 0;
               image(BUnPre, 1150, 350, 150, 150); 
 
             Showy = 1;
-            PlayersR = ["Bacon", "Pangi", "Spoke", "Zam", "Clown", "Parrot", "Woogie", "Subz", "Cube", "Jaron", "Spep", "Terrain", "Planet", "Ro", "Leo", "Ash", "Red", "Rek", "Vitalasy", "Cluch", "Poafa", "Mapicc", "Vortex", "Mid","Branzy"];
+            PlayersR = ["Bacon", "Pangi", "Spoke", "Zam", "Clown", "Parrot", "Woogie", "Subz", "Cube", "Jaron", "Spep", "Terrain", "Planet", "Ro", "Leo", "Ash", "Red", "Rek", "Vitalasy", "Clutch", "Poafa", "Mapicc", "Vortex", "Mid","Branzy"];
             PlayerRand = random(0, 24);
             PR = round(PlayerRand);
             Rand = "" + PlayersR[PR];
